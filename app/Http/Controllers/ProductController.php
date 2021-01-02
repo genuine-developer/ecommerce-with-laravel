@@ -254,4 +254,38 @@ class ProductController extends Controller
         return response()->json($scat);
     }
 
+
+    /**
+     * Gallery Update
+     */
+    function GalleryEdit($slug){
+
+        $product_id = Product::where('slug', $slug)->first();
+        $gallery = Gallery::where('product_id', $product_id->id)->get();
+
+        return view('backend.product.product-gallery-edit',
+            [
+                'gallery' => $gallery
+            ]
+        );
+
+    }
+
+    /**
+     * Gallery Image Delete
+     */
+    function GalleryImageDelete($id){
+
+        $gallery = Gallery::findOrFail($id);
+
+        $img_path = public_path('gallery/'.$gallery->created_at->format('Y/m/').$gallery->product_id.'/'.$gallery->images);
+
+        if(file_exists($img_path)){
+            unlink($img_path);
+            $gallery->delete();
+        }
+
+        return back()->with('ImageDelete', 'Image Deleted Successfully!!!');
+    }
+
 }

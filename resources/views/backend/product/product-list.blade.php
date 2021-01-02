@@ -67,6 +67,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('ProductEdit', ['slug'=>$product->slug]) }}" class="btn btn-info">Edit</a>
+                                            <a href="{{ route('GalleryEdit', ['slug'=>$product->slug]) }}" class="btn btn-info">Gallery Edit</a>
                                             <a href="#" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>

@@ -58,6 +58,9 @@ Route::get('/product-add', 'ProductController@ProductAdd')->name('ProductAdd');
 Route::post('/product-post', 'ProductController@ProductPost')->name('ProductPost');
 Route::get('/product-edit/{slug}', 'ProductController@ProductEdit')->name('ProductEdit');
 Route::post('/product-update', 'ProductController@ProductUpdate')->name('ProductUpdate');
+Route::get('/product/gallery-update/{slug}', 'ProductController@GalleryEdit')->name('GalleryEdit');
+Route::get('/product/gallery-image-delete/{id}', 'ProductController@GalleryImageDelete')->name('GalleryImageDelete');
+
 
 /**
  * Ajax Routing
