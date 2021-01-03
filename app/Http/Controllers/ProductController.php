@@ -265,7 +265,8 @@ class ProductController extends Controller
 
         return view('backend.product.product-gallery-edit',
             [
-                'gallery' => $gallery
+                'gallery' => $gallery,
+                'product_id' => $product_id->id
             ]
         );
 
@@ -288,4 +289,42 @@ class ProductController extends Controller
         return back()->with('ImageDelete', 'Image Deleted Successfully!!!');
     }
 
+    /**
+     * MultiImage Update
+     */
+    function MultiImageUpdate(Request $req){
+
+        //$prod = new Product;
+
+        if($req->hasFile('images')){
+
+           
+            $product_id = $req->product_id;
+            $images = $req->file('images');
+
+            $new_location = 'gallery/'
+                . Carbon::now()->format('Y/m/')
+                . $product_id .'/';
+
+            File::makeDirectory($new_location, $mode=0777, true, true);
+
+            foreach ($images as $img) {
+                $img_ext = Str::random(5).'.'.$img->getClientOriginalExtension();
+                Image::make($img)->save(public_path($new_location. $img_ext));
+
+                // Gallery::insert([
+                //     'product_id' => $prod->id,
+                //     'images' => $img_ext,
+                //     'created_at' => Carbon::now()
+                // ]);
+
+                $gallery = new Gallery;
+                $gallery->product_id = $product_id;
+                $gallery->images = $img_ext;
+                $gallery->save();
+            }
+            
+            return back();
+        }
+    }
 }

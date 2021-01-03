@@ -60,7 +60,7 @@ Route::get('/product-edit/{slug}', 'ProductController@ProductEdit')->name('Produ
 Route::post('/product-update', 'ProductController@ProductUpdate')->name('ProductUpdate');
 Route::get('/product/gallery-update/{slug}', 'ProductController@GalleryEdit')->name('GalleryEdit');
 Route::get('/product/gallery-image-delete/{id}', 'ProductController@GalleryImageDelete')->name('GalleryImageDelete');
-
+Route::post('/product/images-update', 'ProductController@MultiImageUpdate')->name('MultiImageUpdate');
 
 /**
  * Ajax Routing
