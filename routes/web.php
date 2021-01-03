@@ -54,13 +54,19 @@ Route::post('/sub-category-update', 'SubCategoryController@SubCategoryUpdate')->
  * Product Controller
  */
 Route::get('/product-list', 'ProductController@Products')->name('Products');
+
 Route::get('/product-add', 'ProductController@ProductAdd')->name('ProductAdd');
 Route::post('/product-post', 'ProductController@ProductPost')->name('ProductPost');
+
 Route::get('/product-edit/{slug}', 'ProductController@ProductEdit')->name('ProductEdit');
 Route::post('/product-update', 'ProductController@ProductUpdate')->name('ProductUpdate');
+
 Route::get('/product/gallery-update/{slug}', 'ProductController@GalleryEdit')->name('GalleryEdit');
 Route::get('/product/gallery-image-delete/{id}', 'ProductController@GalleryImageDelete')->name('GalleryImageDelete');
+
 Route::post('/product/images-update', 'ProductController@MultiImageUpdate')->name('MultiImageUpdate');
+
+Route::get('/product-delete/{id}', 'ProductController@ProductDelete')->name('ProductDelete');
 
 /**
  * Ajax Routing

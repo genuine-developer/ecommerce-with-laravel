@@ -280,7 +280,7 @@ class ProductController extends Controller
         $gallery = Gallery::findOrFail($id);
 
         $img_path = public_path('gallery/'.$gallery->created_at->format('Y/m/').$gallery->product_id.'/'.$gallery->images);
-
+  
         if(file_exists($img_path)){
             unlink($img_path);
             $gallery->delete();
@@ -326,5 +326,36 @@ class ProductController extends Controller
             
             return back();
         }
+    }
+
+    /**
+     * Product Delete
+     */
+    function ProductDelete($id){
+
+        $product = Product::findOrFail($id);
+
+        $img_path = public_path('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail);
+  
+        if(file_exists($img_path)){
+            unlink($img_path);
+        }
+        
+        $gallery = Gallery::where('product_id', $product->id)->get();
+        
+        foreach($gallery as $img){
+            
+            $old_path = public_path('gallery/'.$img->created_at->format('Y/m/').$img->product_id.'/'.$img->images);
+    
+            if(file_exists($old_path)){
+                unlink($old_path);
+                $img->delete();
+            }
+        }
+
+        $product->delete();
+
+        return back()->with('ProductDelete', 'Product Deleted Successfully!!!');
+        
     }
 }

@@ -75,7 +75,7 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror  
     
                              
                                     {{-- <div class="col-sm-1 mg-t-10 mg-sm-t-0 ">
