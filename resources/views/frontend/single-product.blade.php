@@ -71,18 +71,23 @@
                                 <li>Categories:</li>
                                 <li><a href="#">{{ $product->category->category_name }}</a></li>
                             </ul>
+                            @php
+                                $Attributes = App\Attribute::where('product_id', $product->id)->get();
+                            @endphp
                             <ul class="color">
                                 <li>Color:</li>
                                 <li>
-                                    <input type="radio" name="color"> Red
-                                    <input type="radio" name="color"> Yellow
+                                    @foreach ( $Attributes as $color)
+                                        <input type="radio" name="color"> {{ $color->color->color_name}}
+                                    @endforeach
                                 </li>
                             </ul>
                             <ul class="size">
                                 <li>Size:</li>
                                 <li>
-                                    <input type="radio" name="size"> M
-                                    <input type="radio" name="size"> XL
+                                    @foreach ($Attributes as $size)
+                                        <input type="radio" name="size"> {{ $size->size->size_name }}
+                                    @endforeach
                                 </li>
                             </ul>
                             <ul class="socil-icon">
