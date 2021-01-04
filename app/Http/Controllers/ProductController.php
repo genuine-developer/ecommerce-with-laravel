@@ -211,8 +211,6 @@ class ProductController extends Controller
         return response()->json($scat);
     }
 
-<<<<<<< Updated upstream
-=======
 
     /**
      * Gallery Update
@@ -317,5 +315,4 @@ class ProductController extends Controller
         return back()->with('ProductDelete', 'Product Deleted Successfully!!!');
         
     }
->>>>>>> Stashed changes
 }
