@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     function CategoryList(){
 
-        $categories = Category::paginate(5);
+        $categories = Category::paginate(15);
         $trash = Category::onlyTrashed()->get();
 
         return view('backend.category.category-list',
@@ -152,5 +152,30 @@ class CategoryController extends Controller
         $update->save();
 
         return redirect()->route('CategoryList')->with('category_update', 'Category Updated Successfully!!!');
+    }
+
+    /**
+     * Selected Category delete
+     */
+    function SelectedCategoryDelete(Request $request){
+
+        if ($request->cat_id != '') {
+            foreach ($request->cat_id as $category) {
+
+                $cat_product = Product::where('category_id', $request->cat_id)->count();
+
+                if ($cat_product > 0) {
+                    return back()->with('ProductAvailable', 'You can not delete the category with existing Product.');
+                } 
+                else {
+                    Category::findOrFail($category)->delete();
+                }
+            }
+            return back()->with('category_delete', 'Category Deleted Successfully!!!');
+        } 
+        else {
+            return back()->with('NotSelected', 'Product are not selected');
+        }
+            
     }
 }

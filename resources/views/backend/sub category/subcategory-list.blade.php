@@ -17,6 +17,7 @@
                 <table class="table table-hover table-bordered table-primary mg-b-0 mb-3">
                     <thead>
                         <tr>
+                            <th class="text-center"><input type="checkbox" id="checkAll">Check All</th>
                             <th class="text-center">SL</th>
                             <th class="text-center">Sub Category</th>
                             <th class="text-center">Slug</th>
@@ -26,19 +27,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($scategories as $key => $scat)
+                        <form action="{{ route('SelectedSubCategoryDelete') }}" method="post">
+                            @csrf
+                            @foreach ($scategories as $key => $scat)
+                                <tr class="text-center">
+                                    <td><input type="checkbox" name="scat_id[]" value="{{ $scat->id }}"></td>
+                                    <td>{{ $scategories->firstitem() + $key }}</td>
+                                    <td>{{ $scat->subcategory_name ?? 'N/A'}}</td>
+                                    <td>{{ $scat->slug ?? 'N/A'}}</td>
+                                    <td>{{ $scat->get_category->category_name ?? 'N/A'}}</td>
+                                    <td>{{ $scat->created_at != null ? $scat->created_at->diffForHumans() : 'N/A' }}</td>
+                                    <td>
+                                        <a href="{{ route('SubCategoryEdit', ['id'=>$scat->id]) }}" class="btn btn-info">Edit</a>
+                                        <a href="{{ route('SubCategoryDelete', ['id'=>$scat->id]) }}" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             <tr class="text-center">
-                                <td>{{ $scategories->firstitem() + $key }}</td>
-                                <td>{{ $scat->subcategory_name ?? 'N/A'}}</td>
-                                <td>{{ $scat->slug ?? 'N/A'}}</td>
-                                <td>{{ $scat->get_category->category_name ?? 'N/A'}}</td>
-                                <td>{{ $scat->created_at != null ? $scat->created_at->diffForHumans() : 'N/A' }}</td>
                                 <td>
-                                    <a href="{{ route('SubCategoryEdit', ['id'=>$scat->id]) }}" class="btn btn-info">Edit</a>
-                                    <a href="{{ route('SubCategoryDelete', ['id'=>$scat->id]) }}" class="btn btn-danger">Delete</a>
+                                    <button style="cursor: pointer" type="submit" class="btn btn-danger">Delete Selected</button>
                                 </td>
                             </tr>
-                        @endforeach
+                        </form>
                     </tbody>
                 </table>
               {{ $scategories->links() }}
@@ -55,6 +65,7 @@
                 <table class="table table-hover table-bordered table-danger mg-b-0">
                     <thead>
                         <tr>
+                            
                             <th class="text-center">SL</th>
                             <th class="text-center">Sub Category</th>
                             <th class="text-center">Slug</th>
@@ -66,6 +77,7 @@
                     <tbody>
                         @foreach ($strash as $st_cat)
                             <tr class="text-center">
+                                
                                 <th>{{ $loop->index + 1 }}</th>
                                 <td>{{ $st_cat->subcategory_name ?? 'N/A'}}</td>
                                 <td>{{ $st_cat->slug ?? 'N/A'}}</td>
@@ -88,6 +100,12 @@
 @section('footer_js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="text/javascript">
+        //For Select All
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        });
+
+
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

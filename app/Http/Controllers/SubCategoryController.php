@@ -15,7 +15,7 @@ class SubCategoryController extends Controller
     //Show All Subcategories
     function SubCategoryList(){
 
-        $scategories = SubCategory::with('get_category')->paginate(3);
+        $scategories = SubCategory::with('get_category')->paginate(20);
         $strash = SubCategory::onlyTrashed()->get();
 
         return view('backend.sub category.subcategory-list',
@@ -99,5 +99,32 @@ class SubCategoryController extends Controller
         $update->save();
 
         return redirect()->route('SubCategoryList')->with('scategory_update', 'Sub Category Updated Successfully!!!');
+    }
+
+    /**
+     * Delete Selected Sub Category
+     */
+    function SelectedSubCategoryDelete(Request $request){
+
+        // return $request->all();
+
+        if ($request->scat_id != '') {
+            foreach ($request->scat_id as $subcategory) {
+
+                $scat_product = Product::where('subcategory_id', $request->scat_id)->count();
+
+                if ($scat_product > 0) {
+                    return back()->with('ProductAvailable', 'You can not delete the subcategory with existing Product.');
+                } 
+                else {
+                    SubCategory::findOrFail($subcategory)->delete();
+                }
+            }
+            return back()->with('subcategory_delete', 'SubCategory Deleted Successfully!!!');
+        } else {
+            return back()->with('NotSelected', 'Sub Category are not selected');
+        }
+
+
     }
 }
