@@ -171,7 +171,7 @@ class ProductController extends Controller
             $image = $req->file('thumbnail');
             $ext = Str::random(5).'.'.$image->getClientOriginalExtension();
 
-            $old_img_location = public_path('thumbnail/'.$prod->created_at->format('Y/m/').$prod->id.'/'.$prod->thumbnail);
+            $old_img_location = public_path('thumbnail/'.$prod->created_at->format('Y/m/').'/'.$prod->thumbnail);
             //Delete previous Image
             if(file_exists($old_img_location)){
 
