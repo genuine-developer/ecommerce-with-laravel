@@ -13,24 +13,6 @@
 
             <a href="{{ route('CategoryAdd') }}" class="p-1 rounded tx-uppercase tx-bold tx-14 mg-b-10 ml-auto btn btn-success btn-icon"> <i class="fa fa-plus"></i> Add</a>
 
-            @if (session('category_delete'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{ session('category_delete') }}</strong>
-                </div>
-            @endif
-            @if (session('category_update'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{ session('category_update') }}</strong>
-                </div>
-            @endif
            
             <div class="table-responsive">
                 <table class="table table-hover table-bordered table-primary mg-b-0 mb-3">
@@ -68,25 +50,6 @@
 
         <div class="card pd-20 pd-sm-40 mg-t-50">
 
-            @if (session('category_restore'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <strong>{{ session('category_restore') }}</strong>
-                </div>
-            @endif
-            @if (session('category_permanent_delete'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <strong>{{ session('category_permanent_delete') }}</strong>
-                </div>
-            @endif
-           
             <div class="table-responsive">
                 <table class="table table-hover table-bordered table-danger mg-b-0">
                     <thead>
@@ -116,4 +79,53 @@
             </div><!-- table-responsive -->
         </div><!-- card -->
     </div>
+@endsection
+
+@section('footer_js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript">
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        
+        @if (session('category_delete'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('category_delete') }}'
+            })
+        @endif
+        @if (session('ProductAvailable'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('ProductAvailable') }}'
+            })
+        @endif
+        @if (session('category_update'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('category_update') }}'
+            })
+        @endif
+        @if (session('category_restore'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('category_restore') }}'
+            })
+        @endif
+        @if (session('category_permanent_delete'))
+            Toast.fire({
+                icon: 'sucess',
+                title: '{{ session('category_permanent_delete') }}'
+            })
+        @endif
+        
+    </script>
 @endsection

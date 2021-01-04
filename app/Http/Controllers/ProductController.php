@@ -334,7 +334,7 @@ class ProductController extends Controller
     function ProductDelete($id){
 
         $product = Product::findOrFail($id);
-
+        //Thumbnail Path
         $img_path = public_path('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail);
   
         if(file_exists($img_path)){
@@ -342,7 +342,7 @@ class ProductController extends Controller
         }
         
         $gallery = Gallery::where('product_id', $product->id)->get();
-        
+        //Gallery Image Delete
         foreach($gallery as $img){
             
             $old_path = public_path('gallery/'.$img->created_at->format('Y/m/').$img->product_id.'/'.$img->images);
