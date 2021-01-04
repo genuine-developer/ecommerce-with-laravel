@@ -292,7 +292,11 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
         //Thumbnail Path
+<<<<<<< HEAD
         $img_path = public_path('thumbnail/'.$product->created_at->format('Y/m/').'/'.$product->thumbnail);
+=======
+        $img_path = public_path('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail);
+>>>>>>> Color_size
   
         if(file_exists($img_path)){
             unlink($img_path);

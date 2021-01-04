@@ -39,8 +39,12 @@ Route::post('/category-update', 'CategoryController@CategoryUpdate')->name('Cate
 Route::get('/category-restore/{id}', 'CategoryController@CategoryRestore')->name('CategoryRestore');
 Route::get('/category-delete/{id}', 'CategoryController@CategoryDelete')->name('CategoryDelete');
 Route::get('/category-permanent-delete/{id}', 'CategoryController@CategoryPermanentDelete')->name('CategoryPermanentDelete');
+Route::post('/selected-category-delete', 'CategoryController@SelectedCategoryDelete')->name('SelectedCategoryDelete');
 
-// Sub Category Controller
+
+/**
+ * Sub Category Controller
+ */
 Route::get('/sub-category-list', 'SubCategoryController@SubCategoryList')->name('SubCategoryList');
 Route::get('/sub-category-add', 'SubCategoryController@SubCategoryAdd')->name('SubCategoryAdd');
 Route::post('/sub-category-post', 'SubCategoryController@SubCategoryPost')->name('SubCategoryPost');
@@ -48,16 +52,26 @@ Route::get('/sub-category-restore/{id}', 'SubCategoryController@SubCategoryResto
 Route::get('/sub-category-delete/{id}', 'SubCategoryController@SubCategoryDelete')->name('SubCategoryDelete');
 Route::get('/sub-category-permanent-delete/{id}', 'SubCategoryController@SubCategoryParmanentDelete')->name('SubCategoryParmanentDelete');
 Route::get('/sub-category-edit/{id}', 'SubCategoryController@SubCategoryEdit')->name('SubCategoryEdit');
-Route::post('/sub-category-update', 'SubCategoryController@SubCategoryUpdate')->name('SubCategoryUpdate');
+Route::post('/sub-category-update', 'SubCategoryController@SubCategoryUpdate')->name('SubCategoryUpdate'); 
+Route::post('/selected-sub-category-delete', 'SubCategoryController@SelectedSubCategoryDelete')->name('SelectedSubCategoryDelete');
 
 /**
  * Product Controller
  */
 Route::get('/product-list', 'ProductController@Products')->name('Products');
+
 Route::get('/product-add', 'ProductController@ProductAdd')->name('ProductAdd');
 Route::post('/product-post', 'ProductController@ProductPost')->name('ProductPost');
+
 Route::get('/product-edit/{slug}', 'ProductController@ProductEdit')->name('ProductEdit');
 Route::post('/product-update', 'ProductController@ProductUpdate')->name('ProductUpdate');
+
+Route::get('/product/gallery-update/{slug}', 'ProductController@GalleryEdit')->name('GalleryEdit');
+Route::get('/product/gallery-image-delete/{id}', 'ProductController@GalleryImageDelete')->name('GalleryImageDelete');
+
+Route::post('/product/images-update', 'ProductController@MultiImageUpdate')->name('MultiImageUpdate');
+
+Route::get('/product-delete/{id}', 'ProductController@ProductDelete')->name('ProductDelete');
 
 /**
  * Ajax Routing

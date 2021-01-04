@@ -16,6 +16,7 @@
         <div class="row row-sm mg-t-20">
             <div class="col-xl-12">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
+                    
 
                     @if (session('product_update'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -24,6 +25,15 @@
                                 <span class="sr-only">Close</span>
                             </button>
                             <strong>{{ session('product_update') }}</strong>
+                        </div>
+                    @endif
+                    @if (session('ProductDelete'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>{{ session('ProductDelete') }}</strong>
                         </div>
                     @endif
 
@@ -67,7 +77,8 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('ProductEdit', ['slug'=>$product->slug]) }}" class="btn btn-info">Edit</a>
-                                            <a href="#" class="btn btn-danger">Delete</a>
+                                            <a href="{{ route('GalleryEdit', ['slug'=>$product->slug]) }}" class="btn btn-info">Gallery Edit</a>
+                                            <a href="{{ route('ProductDelete', ['id'=>$product->id]) }}" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

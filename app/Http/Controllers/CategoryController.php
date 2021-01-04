@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -11,16 +12,20 @@ use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
-    //Authintication
+    /**
+     * Authintication
+     */
     function __construct()
     {  
         $this->middleware('verified');
     }
 
-    // Category List View
+    /**
+     * Category List View
+     */
     function CategoryList(){
 
-        $categories = Category::paginate(5);
+        $categories = Category::paginate(15);
         $trash = Category::onlyTrashed()->get();
 
         return view('backend.category.category-list',
@@ -31,7 +36,9 @@ class CategoryController extends Controller
         );
     }
 
-    // Category Add View
+    /**
+     * Category Add View
+     */
     function CategoryAdd(){
 
         $categories = Category::paginate(3);
@@ -46,7 +53,9 @@ class CategoryController extends Controller
     }
 
 
-    // Category add
+    /**
+     * 
+     */
     function CategoryPost(Request $req){
         // Form Validation
         $req->validate([
@@ -68,15 +77,26 @@ class CategoryController extends Controller
         return back()->with('category_add', 'Category Added Successfully!!!');
     }
 
-    // Category Delete
+    /**
+     * Category Delete
+     */
     function CategoryDelete($id){
 
-        Category::findOrFail($id)->delete();
+        $cat_product = Product::where('category_id', $id)->count();
 
-        return back()->with('category_delete', 'Category Deleted Successfully!!!'); 
+        if ($cat_product > 0) {
+            return back()->with('ProductAvailable', 'You can not delete the category with existing Product.');
+        } else{
+           
+            $catgory = Category::findOrFail($id)->delete();
+            return back()->with('category_delete', 'Category Deleted Successfully!!!'); 
+        }
+       
     }
 
-    // Category Restore
+    /**
+     * Category Restore
+     */
     function CategoryRestore($id){
 
         Category::withTrashed()->findOrFail($id)->restore();
@@ -84,14 +104,18 @@ class CategoryController extends Controller
         return back()->with('category_restore','Category Restored Successfully!!!');
     }
 
-    // Permanent Delete
+    /**
+     * Permanent Delete
+     */
     function CategoryPermanentDelete($id){
 
         Category::withTrashed()->findOrFail($id)->forceDelete();
         return back()->with('category_permanent_delete', 'Category Deleted Permanently!!!');
     }
 
-    // Category Edit view
+    /**
+     * Category Edit view
+     */
     function CategoryEdit($id){
 
         $categories = Category::paginate(3);
@@ -107,7 +131,9 @@ class CategoryController extends Controller
             ]
         );
     }
-    // Category Edit post
+    /**
+     * Category Edit post
+     */
     function CategoryUpdate(Request $req){
 
         // For updateing using this way have to write protected fillable in model(update, create)
@@ -126,5 +152,30 @@ class CategoryController extends Controller
         $update->save();
 
         return redirect()->route('CategoryList')->with('category_update', 'Category Updated Successfully!!!');
+    }
+
+    /**
+     * Selected Category delete
+     */
+    function SelectedCategoryDelete(Request $request){
+
+        if ($request->cat_id != '') {
+            foreach ($request->cat_id as $category) {
+
+                $cat_product = Product::where('category_id', $request->cat_id)->count();
+
+                if ($cat_product > 0) {
+                    return back()->with('ProductAvailable', 'You can not delete the category with existing Product.');
+                } 
+                else {
+                    Category::findOrFail($category)->delete();
+                }
+            }
+            return back()->with('category_delete', 'Category Deleted Successfully!!!');
+        } 
+        else {
+            return back()->with('NotSelected', 'Product are not selected');
+        }
+            
     }
 }
