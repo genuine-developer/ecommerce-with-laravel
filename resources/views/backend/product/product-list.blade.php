@@ -48,7 +48,7 @@
                                     <tr class="text-center">
                                         <td>{{ $products->firstitem() + $key }}</td>
                                         <td>{{ $product->title ?? 'N/A'}}</td>
-                                        <td><img style="width:100px" src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail) }}" alt="thumbnail"></td>
+                                        <td><img style="width:100px" src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').'/'.$product->thumbnail) }}" alt="thumbnail"></td>
                                         <td>{{ $product->price ?? 'N/A' }}</td>
                                         <td>
                                             @foreach (App\Attribute::where('product_id', $product->id)->get() as $test)
@@ -61,7 +61,7 @@
                                         </td>
                                         <td>
                                             @foreach ($product->gallery as $img)
-                                                <img style="width:75px" src="{{ asset('gallery/'.$img->created_at->format('Y/m/').$img->product_id.'/'.$img->images) }}" alt="thumbnail">     
+                                                <img style="width:75px" src="{{ asset('gallery/'.$img->created_at->format('Y/m/').$img->product_id.'/'.$img->images) }}" alt="images">     
                                             @endforeach
                                            
                                         </td>

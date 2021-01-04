@@ -274,7 +274,7 @@
                             <div class="product-wrap">
                                 <div class="product-img">
                                     <span>Sale</span>
-                                    <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail) }}" alt="{{ $product->title }}">
+                                    <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').'/'.$product->thumbnail) }}" alt="{{ $product->title }}">
                                     <div class="product-icon flex-style">
                                         <ul>
                                             <li><a data-toggle="modal" data-target="#exampleModalCenter{{$product->id}}" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
@@ -307,7 +307,7 @@
                                     </button>
                                     <div class="modal-body d-flex">
                                         <div class="product-single-img w-50">
-                                            <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail) }}" alt="{{ $product->title }}">
+                                            <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').'/'.$product->thumbnail) }}" alt="{{ $product->title }}">
                                         </div>
                                         <div class="product-single-content w-50">
                                             <h3>{{ $product->title }}</h3>

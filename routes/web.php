@@ -67,9 +67,9 @@ Route::get('/product-update/ajax/{id}', 'ProductController@ProductUpdateAjax')->
 /**
  * Add Brand, Color, Size
  */
-Route::get('/add-brand', 'ProductController@AddBrand')->name('AddBrand');
-Route::post('/add-brand-post', 'ProductController@AddBrandPost')->name('AddBrandPost');
-Route::get('/add-color', 'ProductController@AddColor')->name('AddColor');
-Route::post('/add-color-post', 'ProductController@AddColorPost')->name('AddColorPost');
-Route::get('/add-size', 'ProductController@AddSize')->name('AddSize');
-Route::post('/add-size-post', 'ProductController@AddSizePost')->name('AddSizePost');
+Route::get('/add-brand', 'AttributeController@AddBrand')->name('AddBrand');
+Route::post('/add-brand-post', 'AttributeController@AddBrandPost')->name('AddBrandPost');
+Route::get('/add-color', 'AttributeController@AddColor')->name('AddColor');
+Route::post('/add-color-post', 'AttributeController@AddColorPost')->name('AddColorPost');
+Route::get('/add-size', 'AttributeController@AddSize')->name('AddSize');
+Route::post('/add-size-post', 'AttributeController@AddSizePost')->name('AddSizePost');

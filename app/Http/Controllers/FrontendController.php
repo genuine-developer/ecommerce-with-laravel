@@ -10,7 +10,7 @@ class FrontendController extends Controller
 {
     function Front(){
 
-        $products = Product::latest()->limit(2)->get();
+        $products = Product::latest()->limit(5)->get();
 
         return view('frontend.main',
             [

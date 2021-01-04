@@ -26,7 +26,7 @@
                         <div class="product-single-img">
                             <div class="product-active owl-carousel">
                                 <div class="item">
-                                    <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail) }}" alt="">
+                                    <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').'/'.$product->thumbnail) }}" alt="">
                                 </div>
                                 @foreach ($gallery as $gal)
                                     <div class="item">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="product-thumbnil-active  owl-carousel">
                                 <div class="item">
-                                    <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').$product->id.'/'.$product->thumbnail) }}" alt="">
+                                    <img src="{{ asset('thumbnail/'.$product->created_at->format('Y/m/').'/'.$product->thumbnail) }}" alt="">
                                 </div>
                                 @foreach ($gallery as $gal)
                                     <div class="item">
