@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attribute;
+use App\Category;
 use App\Gallery;
 use App\Product;
 use App\Size;
@@ -57,5 +58,18 @@ class FrontendController extends Controller
             $output = $output.' <input name="size_id" type="radio" value="'.$size->size_id.'"> '.$size->Size->size_name.'';
         }
         return $output;
+    }
+
+
+    /**
+     * Shop Page View
+     */
+    function Shop(){
+        return view('frontend.shop',
+            [
+                'category' => Category::orderBy('category_name', 'asc')->get(),
+                'products' => Product::all()
+            ]
+        );
     }
 }

@@ -24,7 +24,8 @@ Auth::routes(['verify' => true]);
 
 // Frontend Controller
 Route::get('/', 'FrontendController@Front')->name('Front');
-Route::get('product/{slug}', 'FrontendController@SingleProduct')->name('SingleProduct');
+Route::get('/product/{slug}', 'FrontendController@SingleProduct')->name('SingleProduct');
+Route::get('/shop', 'FrontendController@Shop')->name('Shop');
 
 // Home Controller
 Route::get('/home', 'HomeController@index')->name('home');
@@ -100,3 +101,4 @@ Route::get('product/get/size/{color}/{product}', 'FrontendController@GetSize')->
 Route::post('/add-to-cart', 'CartController@AddToCart')->name('AddToCart');
 Route::get('/cart', 'CartController@Cart')->name('Cart');
 Route::post('/cart-update', 'CartController@CartUpdate')->name('CartUpdate');
+Route::get('/cart/single-delete/{cart_id}', 'CartController@SingleCartDelete')->name('SingleCartDelete');

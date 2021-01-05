@@ -1,5 +1,7 @@
 @extends('frontend.master')
-
+@section('single_product')
+    active
+@endsection
 @section('content')
         <!-- .breadcumb-area start -->
         <div class="breadcumb-area bg-img-4 ptb-100">

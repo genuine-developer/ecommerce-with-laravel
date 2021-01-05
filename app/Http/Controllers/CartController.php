@@ -26,6 +26,7 @@ class CartController extends Controller
         
         if($exist->exists()){
             $exist->increment('quantity', $request->quantity);
+            return back();
         } else {
             $cart = new Cart;
             $cart->cookie_id = $unique;
@@ -34,6 +35,8 @@ class CartController extends Controller
             $cart->color_id = $request->color_id;
             $cart->size_id = $request->size_id;
             $cart->save();
+
+            return back();
         }
 
         
@@ -57,12 +60,22 @@ class CartController extends Controller
      * Cart Update
      */
     function CartUpdate(Request $request){
-        
+
         foreach ($request->cart_id as $key => $data) {
             $cart = Cart::findOrFail($data);
             $cart->quantity = $request->quantity[$key];
             $cart->save();
         }
+        return back();
+    }
+
+    /**
+     * Single Cart delete
+     */
+    function SingleCartDelete($cartid){
+
+        $cart = Cart::findOrFail($cartid);
+        $cart->delete();
         return back();
     }
 }

@@ -95,10 +95,10 @@
                     <div class="col-lg-7 d-none d-lg-block">
                         <nav class="mainmenu">
                             <ul class="d-flex">
-                                <li class="active"><a href="{{ route('Front') }}">Home</a></li>
+                                <li class="@yield('home')"><a href="{{ route('Front') }}">Home</a></li>
                                 
-                                <li>
-                                    <a href="#">Shop</a>
+                                <li class="@yield('shop')">
+                                    <a href="{{ route('Shop') }}">Shop</a>
                                     {{-- <ul class="dropdown_style">
                                         <li><a href="shop.html">Shop Page</a></li>
                                         <li><a href="single-product.html">Product Details</a></li>
@@ -107,16 +107,16 @@
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                     </ul> --}}
                                 </li>
-                                <li>
+                                <li class="@yield('cart')">
                                     <a href="{{ route('Cart') }}"><i class="fa fa-shopping-bag"></i> Cart</a>
                                     
                                 </li>
-                                <li>
+                                <li class="@yield('blog')">
                                     <a href="#">Blog</a>
                     
                                 </li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">About</a></li>
+                                <li class="@yield('contact')"><a href="#">Contact</a></li>
+                                <li class="@yield('about')"><a href="#">About</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -155,42 +155,29 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>{{ cart()->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/1.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                    @php
+                                        $sub_total = 0;
+                                    @endphp
+                                    @foreach (cart() as $cart_item)
+                                        <li class="cart-items">
+                                            <div class="cart-img">
+                                                <img width="75px" src="{{ asset('thumbnail/'.$cart_item->product->created_at->format('Y/m/').'/'.$cart_item->product->thumbnail) }}" alt="{{ $cart_item->product->title }}">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="{{ route('SingleProduct', ['slug' => $cart_item->product->slug]) }}">{{ $cart_item->product->title }}</a>
+                                                <span>QTY : {{ $cart_item->quantity }}</span>
+                                                <p>$ {{ $cart_item->product->price }}</p>
+                                                <a href="{{ route('SingleCartDelete', ['cart_id'=>$cart_item->id]) }}"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </li>
+                                        @php
+                                            $sub_total += ($cart_item->quantity * $cart_item->product->price);
+                                        @endphp
+                                    @endforeach
+                                    
+                                    <li>Subtotol: <span class="pull-right">$ {{ number_format($sub_total, 2) }}</span></li>
                                     <li>
                                         <button>Check Out</button>
                                     </li>

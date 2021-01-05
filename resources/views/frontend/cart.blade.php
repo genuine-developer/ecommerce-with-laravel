@@ -1,5 +1,7 @@
 @extends('frontend.master')
-
+@section('cart')
+    active
+@endsection
 @section('content')
     
 
@@ -46,7 +48,7 @@
                                 @endphp
                                 @foreach ($carts as $cart)
                                     <tr>
-                                        <td class="images"><img src="assets/images/cart/1.jpg" alt=""></td>
+                                        <td class="images"><img src="{{ asset('thumbnail/'.$cart->product->created_at->format('Y/m/').'/'.$cart->product->thumbnail) }}" alt="{{ $cart->product->title }}"></td>
                                         <td class="product"><a target="_blank" href="{{ route('SingleProduct', ['slug' => $cart->product->slug]) }}">{{ $cart->product->title }}</a></td>
                                         <td class="ptice">$ {{ $cart->product->price }}</td>
                                         <td class="color">{{ $cart->color->color_name }}</td>
@@ -61,7 +63,7 @@
                                         @endphp
 
                                         <td class="total">$ {{ $cart->quantity * $cart->product->price }}</td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
+                                        <td class="remove"><a href="{{ route('SingleCartDelete', ['cart_id'=>$cart->id]) }}"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                 @endforeach
                                 
@@ -74,7 +76,7 @@
                                         <li>
                                             <button>Update Cart</button>
                                         </li>
-                                        <li><a href="shop.html">Continue Shopping</a></li>
+                                        <li><a href="{{ route('Shop') }}">Continue Shopping</a></li>
                                     </ul>
                                     <h3>Cupon</h3>
                                     <p>Enter Your Cupon Code if You Have One</p>
