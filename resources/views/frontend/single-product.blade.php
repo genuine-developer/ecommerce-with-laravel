@@ -60,36 +60,58 @@
                                     <li>(05 Customar Review)</li>
                                 </ul>
                             </div>
+                            <style>
+                                .btnColor{
+                                    height: 35px;
+                                    line-height: 35px;
+                                    text-align: center;
+                                    width: 120px;
+                                    background: #ef4836;
+                                    color: #fff;
+                                    display: block;
+                                    margin-left: 30px;
+                                    border:none;
+                                }
+                                .btnColor:hover{
+                                    background: #333;
+                                }
+                            </style>
+
                             <p>{{ $product->summary }}</p>
-                            <ul class="input-style">
-                                <li class="quantity cart-plus-minus">
-                                    <input type="text" value="1" />
-                                </li>
-                                <li><a href="cart.html">Add to Cart</a></li>
-                            </ul>
-                            <ul class="cetagory">
-                                <li>Categories:</li>
-                                <li><a href="#">{{ $product->category->category_name }}</a></li>
-                            </ul>
-                            @php
-                                $Attributes = App\Attribute::where('product_id', $product->id)->get();
-                            @endphp
-                            <ul class="color">
-                                <li>Color:</li>
-                                <li>
-                                    @foreach ( $Attributes as $color)
-                                        <input type="radio" name="color"> {{ $color->color->color_name}}
-                                    @endforeach
-                                </li>
-                            </ul>
-                            <ul class="size">
-                                <li>Size:</li>
-                                <li>
-                                    @foreach ($Attributes as $size)
-                                        <input type="radio" name="size"> {{ $size->size->size_name }}
-                                    @endforeach
-                                </li>
-                            </ul>
+
+                            <form action="{{ route('AddToCart') }}" method="POST">
+                                @csrf
+
+                                <ul class="input-style">
+                                    <li class="quantity cart-plus-minus">
+                                        <input name="quantity" type="text" value="1" min="1" max="10"  />
+                                    </li>
+                                    <li><button class="btnColor">Add to Cart</button></li>
+                                </ul>
+                                <ul class="cetagory">
+                                    <li>Categories:</li>
+                                    <li><a href="#">{{ $product->category->category_name }}</a></li>
+                                </ul>
+                                
+                                <ul class="color">
+                                    <li>Color:</li>
+                                    <li>
+                                        @foreach ( $groupBy as $color)
+                                            <input name="color" class="color_id" data-product="{{ $color[0]->product_id }}" type="radio"  value="{{ $color[0]->color_id }}"> {{ $color[0]->color->color_name}}
+                                        @endforeach
+                                    </li>
+                                </ul>
+                                <ul class="size">
+                                    <li>Size:</li>
+                                    <li class="sizeadd">
+                                        @foreach ($product->attribute as $size)
+                                            <input name="size" type="radio" > {{ $size->size->size_name }}
+                                        @endforeach
+                                    </li>
+                                </ul>
+                            </form>
+
+
                             <ul class="socil-icon">
                                 <li>Share :</li>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -388,4 +410,25 @@
             </div>
         </div>
         <!-- featured-product-area end -->
+@endsection
+
+
+@section('footer_js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('.color_id').change(function(){
+            //alert(6);
+            let colorid = $(this).val();
+            let productid = $(this).attr('data-product');
+
+            $.ajax({
+                type:"GET",
+                url:"{{ url('product/get/size') }}/"+colorid+'/'+productid,
+                success:function(res){
+                    // console.log(res);
+                    $('.sizeadd').html(res)
+                }
+            });
+        });
+    </script>
 @endsection

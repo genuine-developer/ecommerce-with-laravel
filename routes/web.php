@@ -87,3 +87,14 @@ Route::get('/add-color', 'AttributeController@AddColor')->name('AddColor');
 Route::post('/add-color-post', 'AttributeController@AddColorPost')->name('AddColorPost');
 Route::get('/add-size', 'AttributeController@AddSize')->name('AddSize');
 Route::post('/add-size-post', 'AttributeController@AddSizePost')->name('AddSizePost');
+
+/**
+ * Ajax Get Size
+ */
+Route::get('product/get/size/{color}/{product}', 'FrontendController@GetSize')->name('GetSize');
+
+
+/**
+ * Cart Routing
+ */
+Route::post('/add-to-cart', 'CartController@AddToCart')->name('AddToCart');
