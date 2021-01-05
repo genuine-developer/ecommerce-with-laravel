@@ -57,6 +57,7 @@ class CartController extends Controller
      * Cart Update
      */
     function CartUpdate(Request $request){
+        
         foreach ($request->cart_id as $key => $data) {
             $cart = Cart::findOrFail($data);
             $cart->quantity = $request->quantity[$key];

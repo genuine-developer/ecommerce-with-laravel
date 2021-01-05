@@ -52,8 +52,8 @@
                                         <td class="color">{{ $cart->color->color_name }}</td>
                                         <td class="size">{{ $cart->size->size_name }}</td>
                                         <input type="hidden" name="cart_id[]" value="{{ $cart->id }}">
-                                        <td name="quantity[]" class="quantity cart-plus-minus">
-                                            <input type="text" value="{{ $cart->quantity }}" />
+                                        <td class="quantity cart-plus-minus">
+                                            <input name="quantity[]" type="text" value="{{ $cart->quantity }}" />
                                         </td>
 
                                         @php
