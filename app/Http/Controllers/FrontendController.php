@@ -6,6 +6,8 @@ use App\Attribute;
 use App\Gallery;
 use App\Product;
 use App\Size;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -26,6 +28,7 @@ class FrontendController extends Controller
      * SingleProduct Show
      */
     function SingleProduct($slug){
+
 
         $product = Product::where('slug', $slug)->first();
         $gallery = Gallery::where('product_id', $product->id)->get();
@@ -51,7 +54,7 @@ class FrontendController extends Controller
         
         $sizes = Attribute::where('color_id', $color)->where('product_id', $product)->get();
         foreach ($sizes as $size) {
-            $output = $output.' <input name="size" type="radio" value="'.$size->size_id.'"> '.$size->Size->size_name.'';
+            $output = $output.' <input name="size_id" type="radio" value="'.$size->size_id.'"> '.$size->Size->size_name.'';
         }
         return $output;
     }

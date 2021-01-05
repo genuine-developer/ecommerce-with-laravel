@@ -71,9 +71,9 @@
                                 <ul class="dropdown_style">
                                     <li><a href="{{ route('login') }}">Login</a></li>
                                     <li><a href="{{ route('register') }}">Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">wishlist</a></li>
+                                    <li><a href="{{ route('Cart') }}">Cart</a></li>
+                                    <li><a href="#">Checkout</a></li>
+                                    <li><a href="#">wishlist</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{ route('register') }}"> Login/Register </a></li>
@@ -95,37 +95,28 @@
                     <div class="col-lg-7 d-none d-lg-block">
                         <nav class="mainmenu">
                             <ul class="d-flex">
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
+                                <li class="active"><a href="{{ route('Front') }}">Home</a></li>
+                                
                                 <li>
-                                    <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown_style">
+                                    <a href="#">Shop</a>
+                                    {{-- <ul class="dropdown_style">
                                         <li><a href="shop.html">Shop Page</a></li>
                                         <li><a href="single-product.html">Product Details</a></li>
                                         <li><a href="cart.html">Shopping cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                         <li><a href="wishlist.html">Wishlist</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown_style">
-                                        <li><a href="about.html">About Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                    </ul>
+                                    <a href="{{ route('Cart') }}"><i class="fa fa-shopping-bag"></i> Cart</a>
+                                    
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown_style">
-                                        <li><a href="blog.html">blog Page</a></li>
-                                        <li><a href="blog-details.html">blog Details</a></li>
-                                    </ul>
+                                    <a href="#">Blog</a>
+                    
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About</a></li>
                             </ul>
                         </nav>
                     </div>

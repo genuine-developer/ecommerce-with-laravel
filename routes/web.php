@@ -98,3 +98,5 @@ Route::get('product/get/size/{color}/{product}', 'FrontendController@GetSize')->
  * Cart Routing
  */
 Route::post('/add-to-cart', 'CartController@AddToCart')->name('AddToCart');
+Route::get('/cart', 'CartController@Cart')->name('Cart');
+Route::post('/cart-update', 'CartController@CartUpdate')->name('CartUpdate');

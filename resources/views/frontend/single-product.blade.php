@@ -9,7 +9,7 @@
                         <div class="breadcumb-wrap text-center">
                             <h2>Shop Page</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{{ route('Front') }}">Home</a></li>
                                 <li><span>Shop</span></li>
                             </ul>
                         </div>
@@ -82,6 +82,8 @@
                             <form action="{{ route('AddToCart') }}" method="POST">
                                 @csrf
 
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
                                 <ul class="input-style">
                                     <li class="quantity cart-plus-minus">
                                         <input name="quantity" type="text" value="1" min="1" max="10"  />
@@ -97,7 +99,7 @@
                                     <li>Color:</li>
                                     <li>
                                         @foreach ( $groupBy as $color)
-                                            <input name="color" class="color_id" data-product="{{ $color[0]->product_id }}" type="radio"  value="{{ $color[0]->color_id }}"> {{ $color[0]->color->color_name}}
+                                            <input name="color_id" class="color_id" data-product="{{ $color[0]->product_id }}" type="radio"  value="{{ $color[0]->color_id }}"> {{ $color[0]->color->color_name}}
                                         @endforeach
                                     </li>
                                 </ul>
@@ -105,7 +107,7 @@
                                     <li>Size:</li>
                                     <li class="sizeadd">
                                         @foreach ($product->attribute as $size)
-                                            <input name="size" type="radio" > {{ $size->size->size_name }}
+                                            <input name="size_id" type="radio" > {{ $size->size->size_name }}
                                         @endforeach
                                     </li>
                                 </ul>
