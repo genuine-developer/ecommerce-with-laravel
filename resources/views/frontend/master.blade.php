@@ -72,7 +72,7 @@
                                     <li><a href="{{ route('login') }}">Login</a></li>
                                     <li><a href="{{ route('register') }}">Register</a></li>
                                     <li><a href="{{ route('Cart') }}">Cart</a></li>
-                                    <li><a href="#">Checkout</a></li>
+                                    <li><a href="{{ route('Checkout') }}">Checkout</a></li>
                                     <li><a href="#">wishlist</a></li>
                                 </ul>
                             </li>
@@ -150,7 +150,8 @@
                                     </li>
                                     <li>Subtotol: <span class="pull-right">$70.00</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        <a href="{{ route('Checkout') }}"><button>Check Out</button></a>
+                                        
                                     </li>
                                 </ul>
                             </li>
@@ -202,37 +203,37 @@
                     <div class="row">
                         <div class="col-12 d-block d-lg-none">
                             <ul class="metismenu">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
+                                <li><a href="{{ route('Front') }}">Home</a></li>
+                                <li><a href="#">About</a></li>
                                 <li class="sidemenu-items">
                                     <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Shop </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="shop.html">Shop Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="{{ route('Shop') }}">Shop Page</a></li>
+                                        <li><a href="#">Product Details</a></li>
+                                        <li><a href="{{ route('Cart') }}">Shopping cart</a></li>
+                                        <li><a href="{{ route('Checkout') }}">Checkout</a></li>
+                                        <li><a href="#">Wishlist</a></li>
                                     </ul>
                                 </li>
                                 <li class="sidemenu-items">
                                     <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Pages </a>
                                     <ul aria-expanded="false">
-                                      <li><a href="about.html">About Page</a></li>
-                                      <li><a href="single-product.html">Product Details</a></li>
-                                      <li><a href="cart.html">Shopping cart</a></li>
-                                      <li><a href="checkout.html">Checkout</a></li>
-                                      <li><a href="wishlist.html">Wishlist</a></li>
-                                      <li><a href="faq.html">FAQ</a></li>
+                                      <li><a href="#">About Page</a></li>
+                                      <li><a href="#">Product Details</a></li>
+                                      <li><a href="{{ route('Cart') }}">Shopping cart</a></li>
+                                      <li><a href="{{ route('Checkout') }}">Checkout</a></li>
+                                      <li><a href="#">Wishlist</a></li>
+                                      <li><a href="#">FAQ</a></li>
                                     </ul>
                                 </li>
                                 <li class="sidemenu-items">
                                     <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Blog</a>
                                     <ul aria-expanded="false">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="#">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -275,11 +276,11 @@
                         <div class="col-lg-12 col-12">
                             <div class="footer-top-text text-center">
                                 <ul>
-                                    <li><a href="home.html">home</a></li>
+                                    <li><a href="{{ route('Front') }}">home</a></li>
                                     <li><a href="#">our story</a></li>
                                     <li><a href="#">feed shop</a></li>
-                                    <li><a href="blog.html">how to eat blog</a></li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li><a href="#">how to eat blog</a></li>
+                                    <li><a href="#">contact</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -50,19 +50,21 @@
                                     <tr>
                                         <td class="images"><img src="{{ asset('thumbnail/'.$cart->product->created_at->format('Y/m/').'/'.$cart->product->thumbnail) }}" alt="{{ $cart->product->title }}"></td>
                                         <td class="product"><a target="_blank" href="{{ route('SingleProduct', ['slug' => $cart->product->slug]) }}">{{ $cart->product->title }}</a></td>
-                                        <td class="ptice">$ {{ $cart->product->price }}</td>
+                                        <td class="ptice unit_price{{ $cart->id }}" data-unit{{ $cart->id }}="{{ $cart->product->price }}">$ {{ $cart->product->price }}</td>
                                         <td class="color">{{ $cart->color->color_name }}</td>
                                         <td class="size">{{ $cart->size->size_name }}</td>
                                         <input type="hidden" name="cart_id[]" value="{{ $cart->id }}">
                                         <td class="quantity cart-plus-minus">
-                                            <input name="quantity[]" type="text" value="{{ $cart->quantity }}" />
+                                            <input name="quantity[]" class="qty_quantity{{ $cart->id }}" type="text" value="{{ $cart->quantity }}" />
+                                            <div class="dec qtybutton qtyminus{{ $cart->id }}">-</div>
+                                            <div class="inc qtybutton qtyplus{{ $cart->id }}">+</div>
                                         </td>
 
                                         @php
                                             $grand_total += ($cart->quantity * $cart->product->price);
                                         @endphp
 
-                                        <td class="total">$ {{ $cart->quantity * $cart->product->price }}</td>
+                                        <td class="total total_unit{{ $cart->id }}">$ {{ $cart->quantity * $cart->product->price }}</td>
                                         <td class="remove"><a href="{{ route('SingleCartDelete', ['cart_id'=>$cart->id]) }}"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                 @endforeach
@@ -91,9 +93,9 @@
                                     <h3>Cart Totals</h3>
                                     <ul>
                                         <li><span class="pull-left">Subtotal </span>$380.00</li>
-                                        <li><span class="pull-left"> Total </span> ${{ $grand_total }}</li>
+                                        <li><span class="pull-left"> Total </span> $ <span class="grand_total" >{{ $grand_total }}</span></li>
                                     </ul>
-                                    <a href="checkout.html">Proceed to Checkout</a>
+                                    <a href="{{ route('Checkout') }}">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -105,4 +107,30 @@
     <!-- cart-area end -->
 
 
+@endsection
+
+@section('footer_js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            let total = 0
+
+            @foreach($carts as $cart)
+                $('.qtyminus{{ $cart->id }}').click(function(){
+                    let qty_quantity = $('.qty_quantity{{ $cart->id }}').val()
+                    let unit_price = $('.unit_price{{ $cart->id }}').attr('data-unit{{ $cart->id }}')
+                    $('.total_unit{{ $cart->id }}').html('$'+qty_quantity * unit_price)
+                    
+                })
+        
+                $('.qtyplus{{ $cart->id }}').click(function(){
+                    let qty_quantity = $('.qty_quantity{{ $cart->id }}').val()
+                    let unit_price = $('.unit_price{{ $cart->id }}').attr('data-unit{{ $cart->id }}')
+                    $('.total_unit{{ $cart->id }}').html('$'+qty_quantity * unit_price)
+                   
+                })
+            @endforeach
+
+        })
+    </script>
 @endsection

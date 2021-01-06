@@ -102,3 +102,9 @@ Route::post('/add-to-cart', 'CartController@AddToCart')->name('AddToCart');
 Route::get('/cart', 'CartController@Cart')->name('Cart');
 Route::post('/cart-update', 'CartController@CartUpdate')->name('CartUpdate');
 Route::get('/cart/single-delete/{cart_id}', 'CartController@SingleCartDelete')->name('SingleCartDelete');
+
+
+/**
+ * Checkout Controller
+ */
+Route::get('/checkout', 'CheckoutController@Checkout')->name('Checkout');

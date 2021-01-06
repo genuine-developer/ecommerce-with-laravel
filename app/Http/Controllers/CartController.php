@@ -78,4 +78,6 @@ class CartController extends Controller
         $cart->delete();
         return back();
     }
+
+
 }
