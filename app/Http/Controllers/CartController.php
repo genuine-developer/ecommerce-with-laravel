@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Coupon;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -45,15 +47,65 @@ class CartController extends Controller
     /**
      * Cart Page view
      */
-    function Cart(){
+    function Cart(Request $request){
 
-        $cookie = Cookie::get('cookie_id');
 
-        return view('frontend.cart',
-            [
-                'carts' => Cart::where('cookie_id', $cookie)->get()
-            ]
-        );
+        $coupon_discount = 0;
+        $coup_code = $request->coupon_code;
+
+         if ($request->coupon_code == '') {
+
+            $cookie = Cookie::get('cookie_id');
+            
+            return view('frontend.cart',
+                [
+                    'carts' => Cart::where('cookie_id', $cookie)->get(),
+                    'coupon_discount' => $coupon_discount
+                    
+                ]
+            );
+
+         } else {
+
+            $cookie = Cookie::get('cookie_id');
+            $req_coupon = Coupon::where('code', $request->coupon_code)->exists(); 
+
+            if ($req_coupon) {
+                $carts = Cart::where('cookie_id', $cookie)->get();
+                $valid_date = Coupon::where('code', $request->coupon_code)->first();
+               
+                if (Carbon::now()->format('Y-m-d') <= $valid_date->validity){
+
+                    if ($valid_date->level == 'amount') {
+
+                        $coupon_discount = $valid_date->discount;
+
+                    } else {
+                        $total = 0;
+                        foreach($carts as $cart){
+                            $total += $cart->product->price * $cart->quantity;
+                        }
+                        $coupon_discount = ($total / 100) * $valid_date->discount;
+                    }
+                } else {
+                    return back()->with('coupon_invalid', 'Coupon Code Expired!!!');
+                }
+
+            } else {
+                return back()->with('coupon_exist', 'Coupon Code Does not exist!!!');
+            }
+
+            return view('frontend.cart',
+                [
+                    'carts' => Cart::where('cookie_id', $cookie)->get(),
+                    'coupon_discount' => $coupon_discount,
+                    'coup_code' => $coup_code
+                ]
+            );
+         }
+         
+
+        
     }
 
     /**

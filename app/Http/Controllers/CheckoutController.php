@@ -18,4 +18,6 @@ class CheckoutController extends Controller
     function Checkout(){
         return view('frontend.checkout');
     }
+
+    
 }

@@ -99,12 +99,24 @@ Route::get('product/get/size/{color}/{product}', 'FrontendController@GetSize')->
  * Cart Routing
  */
 Route::post('/add-to-cart', 'CartController@AddToCart')->name('AddToCart');
-Route::get('/cart', 'CartController@Cart')->name('Cart');
 Route::post('/cart-update', 'CartController@CartUpdate')->name('CartUpdate');
 Route::get('/cart/single-delete/{cart_id}', 'CartController@SingleCartDelete')->name('SingleCartDelete');
 
+// Route::get('/cart', 'CartController@Cart')->name('Cart');
+Route::get('/cart', 'CartController@Cart')->name('Cart');
 
 /**
  * Checkout Controller
  */
 Route::get('/checkout', 'CheckoutController@Checkout')->name('Checkout');
+
+
+/**
+ * Coupopn Controller
+ */
+Route::get('/coupon-list', 'CouponController@CoupponList')->name('CoupponList');
+Route::get('/add-coupon', 'CouponController@CouponAdd')->name('CouponAdd');
+Route::post('/coupon-store', 'CouponController@CouponStore')->name('CouponStore');
+Route::get('/coupon-delete', 'CouponController@CouponDelete')->name('CouponDelete');
+//Route::get('/coupon-apply', 'CouponController@ApplyCoupon')->name('ApplyCoupon');
+

@@ -80,26 +80,31 @@
                                         </li>
                                         <li><a href="{{ route('Shop') }}">Continue Shopping</a></li>
                                     </ul>
-                                    <h3>Cupon</h3>
-                                    <p>Enter Your Cupon Code if You Have One</p>
+                    </form>
+
+                                <form action="{{ route('Cart') }}" method="GET">
+                                    <h3>Coupon</h3>
+                                    <p>Enter Your Coupon Code if You Have One</p>
                                     <div class="cupon-wrap">
-                                        <input type="text" placeholder="Cupon Code">
-                                        <button>Apply Cupon</button>
+                                        <input name="coupon_code" type="text" placeholder="Coupon Code" value="{{ $coup_code ?? '' }}">
+                                        <button>Apply Coupon</button>
                                     </div>
+                                </form>
                                 </div>
                             </div>
                             <div class="col-xl-3 offset-xl-5 col-lg-4 offset-lg-3 col-md-6">
                                 <div class="cart-total text-right">
                                     <h3>Cart Totals</h3>
                                     <ul>
-                                        <li><span class="pull-left">Subtotal </span>$380.00</li>
-                                        <li><span class="pull-left"> Total </span> $ <span class="grand_total" >{{ $grand_total }}</span></li>
+                                        <li><span class="pull-left">Sub Total </span>$ {{ $grand_total ?? 0 }}</li>
+                                        <li><span class="pull-left">Coupon Discount </span>$ {{ $coupon_discount ?? 0 }}</li>
+                                        <li><span class="pull-left">Total </span> $ <span class="grand_total" >{{ $grand_total - $coupon_discount }}</span></li>
                                     </ul>
                                     <a href="{{ route('Checkout') }}">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -132,5 +137,37 @@
             @endforeach
 
         })
+    </script>
+
+    {{-- For Alerts --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript">
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        
+        @if (session('coupon_invalid'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('coupon_invalid') }}'
+            })
+        @endif
+      
+        @if (session('coupon_exist'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('coupon_exist') }}'
+            })
+        @endif
+       
     </script>
 @endsection

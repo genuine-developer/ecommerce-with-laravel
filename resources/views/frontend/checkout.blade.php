@@ -154,19 +154,19 @@
                         </ul>
                         <ul class="payment-method">
                             <li>
-                                <input id="bank" type="checkbox">
+                                <input id="bank" value="bank" type="radio" name="payment">
                                 <label for="bank">Direct Bank Transfer</label>
                             </li>
                             <li>
-                                <input id="paypal" type="checkbox">
+                                <input id="paypal" value="paypal" type="radio" name="payment">
                                 <label for="paypal">Paypal</label>
                             </li>
                             <li>
-                                <input id="card" type="checkbox">
+                                <input id="card" value="card" type="radio" name="payment">
                                 <label for="card">Credit Card</label>
                             </li>
                             <li>
-                                <input id="delivery" type="checkbox">
+                                <input id="delivery" value="cash" type="radio" name="payment">
                                 <label for="delivery">Cash on Delivery</label>
                             </li>
                         </ul>
