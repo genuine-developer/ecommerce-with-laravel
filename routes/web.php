@@ -93,7 +93,13 @@ Route::post('/add-size-post', 'AttributeController@AddSizePost')->name('AddSizeP
  * Ajax Get Size
  */
 Route::get('product/get/size/{color}/{product}', 'FrontendController@GetSize')->name('GetSize');
+Route::get('api/get-state-list/{country_id}', 'CheckoutController@GetState')->name('GetState');
+Route::get('api/get-city-list/{cities}', 'CheckoutController@GetCity')->name('GetCity');
 
+/**
+ * Payment Controller
+ */
+Route::post('/payment', 'PaymentController@Payment')->name('Payment');
 
 /**
  * Cart Routing
