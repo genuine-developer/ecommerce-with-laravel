@@ -34,7 +34,7 @@ class PaymentController extends Controller
 
         $shipping = new Shipping;
         $shipping->user_id = Auth::id();
-        $shipping->first_name = $request->frist_name;
+        $shipping->first_name = $request->first_name;
         $shipping->last_name = $request->last_name;
         $shipping->email = $request->email;
         $shipping->phone = $request->phone; 
@@ -43,8 +43,8 @@ class PaymentController extends Controller
         $shipping->address = $request->address;
         $shipping->zipcode = $request->zipcode;
         $shipping->note = $request->note;
-        $shipping->status = $request->status;
-        $shipping->payment_status = $request->payment_status;
+        // $shipping->status = $request->status;
+        // $shipping->payment_status = $request->payment_status;
         $shipping->coupon_code = $request->coupon_code; 
         $shipping->save();
         
