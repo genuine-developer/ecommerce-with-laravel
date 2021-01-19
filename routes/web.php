@@ -101,6 +101,7 @@ Route::get('api/get-city-list/{cities}', 'CheckoutController@GetCity')->name('Ge
  */
 Route::post('/payment', 'PaymentController@Payment')->name('Payment');
 
+
 /**
  * Cart Routing
  */

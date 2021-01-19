@@ -15,6 +15,8 @@ class CartController extends Controller
      * Add To Cart
      */
     function AddToCart(Request $request){
+
+        //return $request->all();
         
         $cookie = Cookie::get('cookie_id');
 
