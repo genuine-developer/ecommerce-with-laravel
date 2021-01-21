@@ -150,8 +150,9 @@
 
             <div class="card pd-20 pd-sm-25">
             <h6 class="card-body-title">Pie Chart</h6>
-            <p class="mg-b-20 mg-sm-b-30">Labels can be hidden if the slice is less than a given percentage of the pie.</p>
-            <div id="flotPie2" class="ht-200 ht-sm-250"></div>
+            {{-- <p class="mg-b-20 mg-sm-b-30">Labels can be hidden if the slice is less than a given percentage of the pie.</p> --}}
+            {{-- <div id="flotPie2" class="ht-200 ht-sm-250"></div> --}}
+            <canvas id="myChart" width="400" height="400"></canvas>
             </div><!-- card -->
 
             <div class="card widget-messages mg-t-20">
@@ -211,4 +212,43 @@
     </div><!-- sl-pagebody - ->
 
 
+@endsection
+
+@section('footer_js')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Today', 'Yeasterday', '7 Days ago'],
+        datasets: [{
+            label: '# of Votes',
+            data: [{{ $today }}, {{ $yesterday }}, {{ $sevenDays }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 @endsection

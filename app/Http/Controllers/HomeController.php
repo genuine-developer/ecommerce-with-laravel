@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,7 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard');
+        $today = Order::wheredate('created_at', Carbon::now())->count();
+        $sevenDays = Order::where('created_at', Carbon::now()->subDays(7))->count();
+        $yesterday = Order::where('created_at', Carbon::yesterday())->count();
+        return view('backend.dashboard',
+            [
+                'today' => $today,
+                'sevenDays' => $sevenDays,
+                'yesterday' => $yesterday,
+
+            ]
+        );
     }
 
     /**
