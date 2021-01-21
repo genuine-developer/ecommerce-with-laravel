@@ -24,8 +24,8 @@ class PaymentController extends Controller
 
     function Payment(Request $request){
 
-        $order = Order::findOrFail(1);
-        Mail::to(Auth::id())->send(new OrderShipped($order));
+        $order = Order::where('shipping_id', 9)->get();
+        Mail::to(Auth::user()->email)->send(new OrderShipped($order));
 
         // return $request->all();
     

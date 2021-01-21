@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,18 @@ class HomeController extends Controller
                 'users' => $users,
                 'total_user' => $total_user
             ]);
+    }
+
+    /**
+     * Order Function
+     */
+    function Orders(){
+        $orders = Order::latest()->paginate();
+        return view('backend.orders.order',
+            [
+                'orders' => $orders
+            ]
+        );
     }
 
 

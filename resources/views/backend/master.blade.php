@@ -79,6 +79,14 @@
           <li class="nav-item"><a href="{{ route('ProductAdd') }}" class="nav-link">Add Product</a></li>
         </ul>
 
+        {{-- Sales and Orders --}}
+        <a href="{{ route('Orders') }}" class="sl-menu-link @yield('order_active')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
+            <span class="menu-item-label">Orders</span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+
         {{-- Category --}}
         <a href="#" class="sl-menu-link @yield('category_active')">
             <div class="sl-menu-item">

@@ -127,3 +127,7 @@ Route::post('/coupon-store', 'CouponController@CouponStore')->name('CouponStore'
 Route::get('/coupon-delete', 'CouponController@CouponDelete')->name('CouponDelete');
 //Route::get('/coupon-apply', 'CouponController@ApplyCoupon')->name('ApplyCoupon');
 
+/**
+ * Order Route
+ */
+Route::get('/orders', 'HomeController@Orders')->name('Orders');

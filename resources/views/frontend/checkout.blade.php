@@ -148,7 +148,7 @@
                                 <input id="card" value="card" type="radio" name="payment">
                                 <label for="card">Credit Card</label>
                                 
-                                    <label for="card-element">
+                                    {{-- <label for="card-element">
                                         Credit or debit card
                                       </label>
                                       <div id="card-element">
@@ -156,7 +156,7 @@
                                       </div>
                                   
                                       <!-- Used to display form errors. -->
-                                      <div id="card-errors" role="alert"></div> 
+                                      <div id="card-errors" role="alert"></div>  --}}
                             </li>
                            
                             <li>
