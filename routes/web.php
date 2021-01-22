@@ -131,3 +131,5 @@ Route::get('/coupon-delete', 'CouponController@CouponDelete')->name('CouponDelet
  * Order Route
  */
 Route::get('/orders', 'HomeController@Orders')->name('Orders');
+Route::get('/orders/excel/download', 'HomeController@ExcelDownload')->name('ExcelDownload');
+Route::post('/category/excel/import', 'HomeController@CategoryImport')->name('CategoryImport');

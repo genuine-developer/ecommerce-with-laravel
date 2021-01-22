@@ -13,9 +13,16 @@
             <h5>{{ __('Total Orders ') }}({{ $total_user }})</h5>
         </div> --}}
         <div class="row row-sm mg-t-20">
+            <form action="{{ route('CategoryImport') }}" method="POST">
+                @csrf
+                <input type="file" name="excel">
+                <input type="submit" value="Upload Excel" class="btn btn-success">
+            </form>
+            
             <div class="col-xl-12">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                   
+                    <a href="{{ route('ExcelDownload') }}" class="p-1 rounded tx-uppercase tx-bold tx-14 mg-b-10 ml-auto btn btn-success btn-icon "> <i class="icon ion-share"></i> Export</a>
+                    
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-primary mg-b-0 mb-3">
                             <thead>

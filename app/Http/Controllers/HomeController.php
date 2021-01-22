@@ -6,6 +6,10 @@ use App\Order;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\CategoryImport;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -63,6 +67,23 @@ class HomeController extends Controller
                 'orders' => $orders
             ]
         );
+    }
+
+    /**
+     * Excel Download
+     */
+    function ExcelDownload(){
+        return Excel::download(new OrderExport, 'orders.xlsx');
+    }
+
+    /**
+     * Category Import Excel
+     */
+    public function CategoryImport(Request $request) 
+    {
+        Excel::import(new CategoryImport, $request->file('excel'));
+        
+        return redirect('/')->with('success', 'All good!');
     }
 
 
