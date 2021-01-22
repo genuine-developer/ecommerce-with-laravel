@@ -100,6 +100,7 @@ Route::get('api/get-city-list/{cities}', 'CheckoutController@GetCity')->name('Ge
  * Payment Controller
  */
 Route::post('/payment', 'PaymentController@Payment')->name('Payment');
+Route::get('/getPaymentStatus', 'PaymentController@getPaymentStatus')->name('getPaymentStatus');
 
 
 /**
