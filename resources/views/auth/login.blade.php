@@ -54,7 +54,8 @@
                                 @endif
                             </div>
                             <div class="row">
-                                <a href="{{ route('LoginWithGithub') }}"> <i class="fa fa-github"></i> Github Login</a>
+                                <a class="p-4" href="{{ route('LoginWithGithub') }}"> <i class="fa fa-github"></i> Github Login</a>
+                                <a class="p-4" href="{{ route('LoginWithGoogle') }}"> <i class="fa fa-google-plus"></i> Google Login</a>
                             </div>
                             <button type="submit">SIGN IN</button>
                                 

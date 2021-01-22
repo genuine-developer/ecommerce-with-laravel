@@ -155,4 +155,7 @@ Route::get('/permission-edit-to/users/{user_id}', 'RoleController@UserAddPermiss
  * Scial Controller
  */
 Route::get('/login/github', 'SocialController@LoginWithGithub')->name('LoginWithGithub');
-Route::get('/callback-url', 'SocialController@GithubCallBack')->name('GithubCallBack');
+Route::get('/callback-url/github', 'SocialController@GithubCallBack')->name('GithubCallBack');
+
+Route::get('/login/google', 'SocialController@LoginWithGoogle')->name('LoginWithGoogle');
+Route::get('/callback-url/google', 'SocialController@GoogleCallBack')->name('GoogleCallBack');
