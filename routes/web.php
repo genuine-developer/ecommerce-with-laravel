@@ -147,3 +147,5 @@ Route::get('/orders/pdf/download', 'HomeController@PDFDownload')->name('PDFDownl
 Route::get('/role-manager', 'RoleController@Role')->name('Role');
 Route::post('/role-add-to/permission', 'RoleController@RoleAddPermission')->name('RoleAddPermission');
 Route::post('/role-add-to/users', 'RoleController@UserAddRole')->name('UserAddRole');
+Route::post('/permission-add-to/users', 'RoleController@UserAddPermission')->name('UserAddPermission');
+Route::get('/permission-edit-to/users/{user_id}', 'RoleController@UserAddPermissionView')->name('EditPermission');

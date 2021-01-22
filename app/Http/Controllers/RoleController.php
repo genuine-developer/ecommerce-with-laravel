@@ -55,4 +55,35 @@ class RoleController extends Controller
         //$role->syncPermissions($permission_name);
         return back();
     }
+
+    /**
+     * Permission Given View
+     */
+    function UserAddPermissionView($user_id){
+        
+        $users = User::findOrFail($user_id);
+       
+        $permissions = Permission::all();
+        
+        return view('backend.users.edit-permission',
+            [
+                'users' => $users,
+                'permissions' => $permissions
+            ]);
+    }
+
+    /**
+     * Permission to User
+     */
+    function UserAddPermission(Request $request){
+      
+        $user = User::findOrFail($request->user_id);
+        $permission_name = $request->permission;
+      
+        //Multiple Permission
+        $user->syncPermissions($permission_name);
+        //Single Permission
+        //$role->syncPermissions($permission_name);
+        return back();
+    }
 }
