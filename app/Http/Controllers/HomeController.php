@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\User;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Exports\OrderExport;
@@ -94,6 +95,18 @@ class HomeController extends Controller
         $to = $request->end;
 
         return Excel::download(new OrderExport($from, $to), 'orders.xlsx');
+    }
+
+    /**
+     * PDF Download
+     */
+    function PDFDownload(){
+        $orders = Order::all();
+        $pdf = PDF::loadView('backend.exports.pdf', [
+            'orders'=> $orders
+        ]);
+        return $pdf->download('invoice.pdf');
+
     }
 
 }

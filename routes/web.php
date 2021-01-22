@@ -134,3 +134,8 @@ Route::get('/orders', 'HomeController@Orders')->name('Orders');
 Route::get('/orders/excel/download', 'HomeController@ExcelDownload')->name('ExcelDownload');
 Route::post('/category/excel/import', 'HomeController@CategoryImport')->name('CategoryImport');
 Route::post('/category/excel/export-selected', 'HomeController@SelectedDateExcelDownload')->name('SelectedDateExcelDownload');
+
+/**
+ * Route for pdf
+ */
+Route::get('/orders/pdf/download', 'HomeController@PDFDownload')->name('PDFDownload');
