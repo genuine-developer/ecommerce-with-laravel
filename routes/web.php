@@ -140,3 +140,10 @@ Route::post('/category/excel/export-selected', 'HomeController@SelectedDateExcel
  * Route for pdf
  */
 Route::get('/orders/pdf/download', 'HomeController@PDFDownload')->name('PDFDownload');
+
+/**
+ * Role Controller
+ */
+Route::get('/role-manager', 'RoleController@Role')->name('Role');
+Route::post('/role-add-to/permission', 'RoleController@RoleAddPermission')->name('RoleAddPermission');
+Route::post('/role-add-to/users', 'RoleController@UserAddRole')->name('UserAddRole');

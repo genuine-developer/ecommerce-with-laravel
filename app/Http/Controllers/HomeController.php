@@ -11,6 +11,7 @@ use App\Exports\OrderExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\CategoryImport;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
@@ -51,10 +52,12 @@ class HomeController extends Controller
     {
         $users = User::orderBy('name', 'asc')->paginate(5);
         $total_user = User::count();
+        $roles = Role::all();
         return view('backend.users.users',
             [
                 'users' => $users,
-                'total_user' => $total_user
+                'total_user' => $total_user,
+                'roles' => $roles
             ]);
     }
 

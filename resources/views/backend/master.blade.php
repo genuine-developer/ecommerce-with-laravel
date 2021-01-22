@@ -114,6 +114,20 @@
           <li class="nav-item"><a href="{{ route('AddBrand') }}" class="nav-link">Add Brand</a></li>
           <li class="nav-item"><a href="{{ route('AddSize') }}" class="nav-link">Add Sizes</a></li>
         </ul>
+        {{-- Role Management --}}
+        <a href="#" class="sl-menu-link @yield('role_active')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
+            <span class="menu-item-label">Role Management</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="#" class="nav-link">Add New Role</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Add New Permission</a></li>
+          <li class="nav-item"><a href="{{ route('Role') }}" class="nav-link">Assign Permission</a></li>
+        </ul>
+
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
