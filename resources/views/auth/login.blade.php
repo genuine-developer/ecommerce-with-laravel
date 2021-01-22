@@ -53,6 +53,9 @@
                                     </div>
                                 @endif
                             </div>
+                            <div class="row">
+                                <a href="{{ route('LoginWithGithub') }}"> <i class="fa fa-github"></i> Github Login</a>
+                            </div>
                             <button type="submit">SIGN IN</button>
                                 
                             <div class="text-center">

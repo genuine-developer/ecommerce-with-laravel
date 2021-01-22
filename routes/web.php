@@ -149,3 +149,10 @@ Route::post('/role-add-to/permission', 'RoleController@RoleAddPermission')->name
 Route::post('/role-add-to/users', 'RoleController@UserAddRole')->name('UserAddRole');
 Route::post('/permission-add-to/users', 'RoleController@UserAddPermission')->name('UserAddPermission');
 Route::get('/permission-edit-to/users/{user_id}', 'RoleController@UserAddPermissionView')->name('EditPermission');
+
+
+/**
+ * Scial Controller
+ */
+Route::get('/login/github', 'SocialController@LoginWithGithub')->name('LoginWithGithub');
+Route::get('/callback-url', 'SocialController@GithubCallBack')->name('GithubCallBack');
