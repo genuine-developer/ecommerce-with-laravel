@@ -13,10 +13,17 @@
             <h5>{{ __('Total Orders ') }}({{ $total_user }})</h5>
         </div> --}}
         <div class="row row-sm mg-t-20">
-            <form action="{{ route('CategoryImport') }}" method="POST">
+            <form action="{{ route('CategoryImport') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="excel">
                 <input type="submit" value="Upload Excel" class="btn btn-success">
+            </form>
+            <br>
+            <form action="{{ route('SelectedDateExcelDownload') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="date" class="form-control" name="start">
+                <input type="date" class="form-control" name="end">
+                <input type="submit" value="Selected Date" class="btn btn-success">
             </form>
             
             <div class="col-xl-12">

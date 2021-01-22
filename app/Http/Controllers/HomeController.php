@@ -86,5 +86,14 @@ class HomeController extends Controller
         return redirect('/')->with('success', 'All good!');
     }
 
+    /**
+     * Selceted date
+     */
+    function SelectedDateExcelDownload(Request $request){
+        $from = $request->start;
+        $to = $request->end;
+
+        return Excel::download(new OrderExport($from, $to), 'orders.xlsx');
+    }
 
 }
