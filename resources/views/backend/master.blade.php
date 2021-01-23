@@ -128,6 +128,21 @@
           <li class="nav-item"><a href="{{ route('Role') }}" class="nav-link">Assign Permission</a></li>
         </ul>
 
+        {{-- Blog --}}
+        <a href="#" class="sl-menu-link @yield('blog_active')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
+            <span class="menu-item-label">Blog</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link">View Blog</a></li>
+          <li class="nav-item"><a href="{{ route('blog.create') }}" class="nav-link">Add Blog</a></li>
+      
+        </ul>
+        
+
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>

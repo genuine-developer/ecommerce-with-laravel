@@ -5,6 +5,7 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -159,3 +160,16 @@ Route::get('/callback-url/github', 'SocialController@GithubCallBack')->name('Git
 
 Route::get('/login/google', 'SocialController@LoginWithGoogle')->name('LoginWithGoogle');
 Route::get('/callback-url/google', 'SocialController@GoogleCallBack')->name('GoogleCallBack');
+
+
+
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+
+    Route::resource('blog', 'BlogController');
+
+});
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
