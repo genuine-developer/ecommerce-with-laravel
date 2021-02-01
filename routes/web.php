@@ -173,3 +173,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
+/**
+ * Blog View Route
+ */
+Route::get('/blogs', 'FrontendController@Blogs')->name('Blogs');
+Route::get('/{slug}', 'FrontendController@SingleBlog')->name('SingleBlog');

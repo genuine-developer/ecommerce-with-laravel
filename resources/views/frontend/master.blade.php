@@ -113,7 +113,7 @@
                                     
                                 </li>
                                 <li class="@yield('blog')">
-                                    <a href="#">Blog</a>
+                                    <a href="{{ route('Blogs') }}">Blog</a>
                     
                                 </li>
                                 <li class="@yield('contact')"><a href="#">Contact</a></li>

@@ -7,6 +7,9 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 
 class BlogController extends Controller
 {
@@ -49,6 +52,10 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'thumbnail' => ['required', 'image']
+        ]);
+
         $blog = new Blog;
         $blog->title = $request->title;
         $blog->slug = Str::slug($request->title);
@@ -56,6 +63,27 @@ class BlogController extends Controller
         $blog->category_id = $request->category_id;
         $blog->user_id = Auth::id();
         $blog->save();
+
+        //For File we can use Storage
+
+        if ($request->hasFile('thumbnail')) {
+
+            
+            $new_location = 'BlogImages/'
+            . $blog->created_at->format('Y/m/')
+            . $blog->id .'/';
+
+            File::makeDirectory($new_location, $mode=0777, true, true);
+
+            $image = $request->file('thumbnail');
+            $ext = Str::slug($request->title).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->save(public_path($new_location. $ext));
+            $blog_update = Blog::findOrFail($blog->id);
+            $blog_update->thumbnail = $ext;
+            $blog_update->save();
+        }
+
+        
         return back()->with('blog_add', 'New Blog Added Successfully!!');
     }
 

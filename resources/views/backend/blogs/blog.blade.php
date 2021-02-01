@@ -34,9 +34,9 @@
                                 <tr class="text-center">
                                     {{-- <td><input type="checkbox" name="cat_id[]" value="{{ $cat->id }}"></td> --}}
                                     <td>{{ $blogs->firstitem() + $key }}</td>
-                                    <td>{{ $blog->category_name ?? 'N/A'}}</td>
+                                    <td>{{ $blog->title ?? 'N/A'}}</td>
                                     <td>{{ $blog->slug ?? 'N/A'}}</td>
-                                    <td>{{ $blog->thumbnail ?? 'N/A'}}</td>
+                                    <td><img style="width:100px" src="{{ asset('BlogImages/'.$blog->created_at->format('Y/m/').'/'.$blog->id.'/'.$blog->thumbnail) }}" alt="thumbnail"></td>
                                     <td>{{ $blog->created_at != null ? $blog->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>
                                         <a href="#" class="btn btn-info">Edit</a>

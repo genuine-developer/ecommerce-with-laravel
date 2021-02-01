@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attribute;
+use App\Blog;
 use App\Category;
 use App\Gallery;
 use App\Product;
@@ -69,6 +70,32 @@ class FrontendController extends Controller
             [
                 'category' => Category::orderBy('category_name', 'asc')->get(),
                 'products' => Product::all()
+            ]
+        );
+    }
+
+    /**
+     * Blog Functions
+     */
+    function Blogs(){
+
+        $blogs = Blog::latest()->paginate(2);
+        return view('frontend.blogs',
+            [
+                'blogs' => $blogs
+            ]
+        );
+    }
+    
+    function SingleBlog($slug){
+
+        $blog = Blog::whereSlug($slug)->first();
+        $category = Category::orderBy('category_name', 'asc')->get();
+        return view('frontend.single-blog',
+            [
+                'blog' => $blog,
+                'category' => $category,
+                'related' => Blog::where('category_id', $blog->category_id)->get()->except(['id', $blog->id])
             ]
         );
     }
