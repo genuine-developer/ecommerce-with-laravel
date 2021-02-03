@@ -54,69 +54,36 @@
                     </div>
                     <div class="comment-form-area">
                         <div class="comment-main">
-                            <h3 class="blog-title"><span>(03)</span>Comments:</h3>
+                            <h3 class="blog-title"><span>({{ $comments->count() }})</span>Comments:</h3>
                             <ol class="comments">
                                 <li class="comment even thread-even depth-1">
-                                    <div class="comment-wrap">
-                                        <div class="comment-theme">
-                                            <div class="comment-image">
-                                                <img src="assets/images/comment/1.png" alt="Jhon">
-                                            </div>
-                                        </div>
-                                        <div class="comment-main-area">
-                                            <div class="comment-wrapper">
-                                                <div class="sewl-comments-meta">
-                                                    <h4>Lily Justin </h4>
-                                                    <span>19 JAN 2019  at 2:30pm</span>
-                                                </div>
-                                                <div class="comment-area">
-                                                    <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                                    @foreach ($comments as $comment)
+                                        <div class="comment-wrap">
+                                            <div class="comment-theme">
+                                                <div class="comment-image">
+                                                    <img src="assets/images/comment/1.png" alt="Jhon">
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="comment-wrap">
-                                        <div class="comment-theme">
-                                            <div class="comment-image">
-                                                <img src="assets/images/comment/2.png" alt="Jhon">
-                                            </div>
-                                        </div>
-                                        <div class="comment-main-area">
-                                            <div class="comment-wrapper">
-                                                <div class="sewl-comments-meta">
-                                                    <h4>Timberlake Justin </h4>
-                                                    <span>19 JAN 2019  at 2:30pm</span>
-                                                </div>
-                                                <div class="comment-area">
-                                                    <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                                            <div class="comment-main-area">
+                                                <div class="comment-wrapper">
+                                                    <div class="sewl-comments-meta">
+                                                        <h4>{{ $comment->name }}</h4>
+                                                        <span>{{ $comment->created_at->format('d M Y') }} at {{$comment->created_at->format('h:i A') }}</span>
+                                                    </div>
+                                                    <div class="comment-area">
+                                                        <p>{{ $comment->comment }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="comment-wrap">
-                                        <div class="comment-theme">
-                                            <div class="comment-image">
-                                                <img src="assets/images/comment/3.png" alt="Jhon">
-                                            </div>
-                                        </div>
-                                        <div class="comment-main-area">
-                                            <div class="comment-wrapper">
-                                                <div class="sewl-comments-meta">
-                                                    <h4>Sata Houston </h4>
-                                                    <span>19 JAN 2019  at 2:30pm</span>
-                                                </div>
-                                                <div class="comment-area">
-                                                    <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </li>
                             </ol>
                         </div>
                         <div id="respond" class="sewl-comment-form comment-respond form-style">
                             <h3 id="reply-title" class="blog-title">Leave a <span>comment</span></h3>
-                            <form novalidate="" method="post" id="commentform" class="comment-form" action="#0">
+                            <form method="post" id="commentform" class="comment-form" action="{{ route('Comments') }}">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="sewl-form-inputs no-padding-left">
@@ -125,7 +92,7 @@
                                                     <input id="name" name="name" value="" tabindex="2" placeholder="Name" type="text">
                                                 </div>
                                                 <div class="col-sm-6 col-12">
-                                                    <input id="email" name="email" value="" tabindex="3" placeholder="Email" type="email">
+                                                    <input id="email" name="email" value="" tabindex="3" placeholder="Email" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,9 +104,9 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-submit">
-                                            <input name="submit" id="submit" value="Send" type="submit">
-                                            <input name="comment_post_ID" value="1" id="comment_post_ID" type="hidden">
-                                            <input name="comment_parent" id="comment_parent" value="0" type="hidden">
+                                            <input id="submit" value="Send" type="submit">
+                                            <input name="blog_id" value="{{ $blog->id }}" id="comment_post_ID" type="hidden">
+                                            
                                         </div>
                                     </div>
                                 </div>

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Attribute;
 use App\Blog;
 use App\Category;
+use App\Comment;
 use App\Gallery;
 use App\Product;
 use App\Size;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -95,8 +97,11 @@ class FrontendController extends Controller
             [
                 'blog' => $blog,
                 'category' => $category,
-                'related' => Blog::where('category_id', $blog->category_id)->get()->except(['id', $blog->id])
+                'related' => Blog::where('category_id', $blog->category_id)->get()->except(['id', $blog->id]),
+                'comments' => Comment::where('status', 2)->latest()->get()
             ]
         );
     }
+
+    
 }

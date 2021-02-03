@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Order;
 use App\User;
 use PDF;
@@ -11,6 +12,7 @@ use App\Exports\OrderExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\CategoryImport;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -115,4 +117,21 @@ class HomeController extends Controller
 
     }
 
+
+    /**
+     * Comments
+     */
+    function Comments(Request $request){
+        
+        $comments = new Comment;
+        $comments->blog_id = $request->blog_id;
+        $comments->user_id = Auth::id();
+        $comments->name = $request->name;
+        $comments->status = 2;
+        $comments->email = $request->email;
+        $comments->comment = $request->comment;
+        $comments->save();
+        
+        return back();
+    }
 }

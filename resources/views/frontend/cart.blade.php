@@ -64,7 +64,7 @@
                                             $grand_total += ($cart->quantity * $cart->product->price);
                                         @endphp
 
-                                        <td class="total total_unit{{ $cart->id }}">$ {{ $cart->quantity * $cart->product->price }}</td>
+                                        <td class="total count_total total_unit{{ $cart->id }}">{{ $cart->quantity * $cart->product->price }}</td>
                                         <td class="remove"><a href="{{ route('SingleCartDelete', ['cart_id'=>$cart->id]) }}"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                 @endforeach
@@ -96,9 +96,9 @@
                                 <div class="cart-total text-right">
                                     <h3>Cart Totals</h3>
                                     <ul>
-                                        <li><span class="pull-left">Sub Total </span>$ {{ $grand_total ?? 0 }}</li>
-                                        <li><span class="pull-left">Coupon Discount </span>$ {{ $coupon_discount ?? 0 }}</li>
-                                        <li><span class="pull-left">Total </span> $ <span class="grand_total" >{{ $grand_total - $coupon_discount }}</span></li>
+                                        <li><span class="pull-left">Sub Total $</span> {{ $grand_total ?? 0 }}</li>
+                                        <li><span class="pull-left">Coupon Discount $ </span> {{ $coupon_discount ?? 0 }}</li>
+                                        <li><span class="pull-left grand_total">Grand Total  $</span><span class="up_total" >{{ $grand_total - $coupon_discount }}</span></li>
                                     </ul>
                                     <a href="{{ route('Checkout') }}">Proceed to Checkout</a>
                                 </div>
@@ -118,21 +118,74 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            let total = 0
-
             @foreach($carts as $cart)
                 $('.qtyminus{{ $cart->id }}').click(function(){
                     let qty_quantity = $('.qty_quantity{{ $cart->id }}').val()
                     let unit_price = $('.unit_price{{ $cart->id }}').attr('data-unit{{ $cart->id }}')
-                    $('.total_unit{{ $cart->id }}').html('$'+qty_quantity * unit_price)
+                    $('.total_unit{{ $cart->id }}').html(qty_quantity * unit_price)
+                    let minus_sub_total = (qty_quantity * unit_price)
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: "{{ url('/quantity/update') }}",
+                        method: "post",
+                        data: {
+                            id: "{{ $cart->id }}",
+                            qty_quantity: qty_quantity,
+                        },
+                        success: function(result){
+                            console.log(result)
+                        }
+                    })
+
+                    let c_total = document.querySelectorAll('.count_total')
+                    let arr = Array.from(c_total)
+                    let sum = 0
+                    arr.map(item=>{
+                        sum += parseInt(item.innerHTML)
+                        $('.up_total').html(sum)
+                        console.log(sum)
+                    })
                     
                 })
         
                 $('.qtyplus{{ $cart->id }}').click(function(){
                     let qty_quantity = $('.qty_quantity{{ $cart->id }}').val()
                     let unit_price = $('.unit_price{{ $cart->id }}').attr('data-unit{{ $cart->id }}')
-                    $('.total_unit{{ $cart->id }}').html('$'+qty_quantity * unit_price)
-                   
+                    $('.total_unit{{ $cart->id }}').html(qty_quantity * unit_price)
+                    let plus_sub_total = (qty_quantity * unit_price)
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: "{{ url('/quantity/update') }}",
+                        method: "post",
+                        data: {
+                            id: "{{ $cart->id }}",
+                            qty_quantity: qty_quantity,
+                        },
+                        success: function(result){
+                            console.log(result)
+                        }
+                    })
+
+                    let c_total = document.querySelectorAll('.count_total')
+                    let arr = Array.from(c_total)
+                    let sum = 0
+                    arr.map(item=>{
+                        sum += parseInt(item.innerHTML)
+                        $('.up_total').html(sum)
+                        console.log(sum)
+                    })
                 })
             @endforeach
 

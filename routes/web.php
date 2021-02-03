@@ -27,6 +27,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', 'FrontendController@Front')->name('Front');
 Route::get('/product/{slug}', 'FrontendController@SingleProduct')->name('SingleProduct');
 Route::get('/shop', 'FrontendController@Shop')->name('Shop');
+Route::post('/comments', 'HomeController@Comments')->name('Comments');
 
 // Home Controller
 Route::get('/home', 'HomeController@index')->name('home');
@@ -110,6 +111,7 @@ Route::get('/getPaymentStatus', 'PaymentController@getPaymentStatus')->name('get
 Route::post('/add-to-cart', 'CartController@AddToCart')->name('AddToCart');
 Route::post('/cart-update', 'CartController@CartUpdate')->name('CartUpdate');
 Route::get('/cart/single-delete/{cart_id}', 'CartController@SingleCartDelete')->name('SingleCartDelete');
+Route::post('/quantity/update', 'CartController@QunatityUpdate')->name('QunatityUpdate');
 
 // Route::get('/cart', 'CartController@Cart')->name('Cart');
 Route::get('/cart', 'CartController@Cart')->name('Cart');

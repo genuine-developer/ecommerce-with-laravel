@@ -133,5 +133,17 @@ class CartController extends Controller
         return back();
     }
 
+    /**
+     * Quantity Update 
+     */
+    function QunatityUpdate(Request $request){
+        $id = $request->id;
+        $qty = $request->qty_quantity;
+        
+        $cart = Cart::findOrFail($id);
+        $cart->quantity = $qty;
+        $cart->save();
+        return response()->json("ok");
+    }
 
 }
