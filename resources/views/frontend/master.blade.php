@@ -79,6 +79,8 @@
                                 </ul>
                             </li>
                             <li><a href="{{ route('register') }}"> Login/Register </a></li>
+                            <li><a href="{{ route('lang', 'en') }}"> EN </a></li>
+                            <li><a href="{{ route('lang', 'es') }}"> ES </a></li>
                         </ul>
                     </div>
                 </div>

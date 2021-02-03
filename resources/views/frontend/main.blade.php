@@ -121,7 +121,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-lg-12 text-center">
-                            <h2 class="big">Deal Of the Day <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</span></h2>
+                            <h2 class="big">{{ __('homepage.deal')}} <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</span></h2>
                         </div>
                         <div class="col-12 col-lg-12 text-center">
                             <div class="count-down-clock text-center">

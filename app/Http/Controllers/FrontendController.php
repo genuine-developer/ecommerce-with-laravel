@@ -12,6 +12,7 @@ use App\Size;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
@@ -19,7 +20,6 @@ class FrontendController extends Controller
     function Front(){
 
         $products = Product::latest()->limit(5)->get();
-
         return view('frontend.main',
             [
                 'products' => $products,

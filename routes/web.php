@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -180,4 +181,17 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
  * Blog View Route
  */
 Route::get('/blogs', 'FrontendController@Blogs')->name('Blogs');
+
+/**
+ * Language Routing
+ */
+Route::get('/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'es'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+   // return back();
+})->name('lang');
+
 Route::get('/{slug}', 'FrontendController@SingleBlog')->name('SingleBlog');
