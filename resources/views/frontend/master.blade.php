@@ -8,6 +8,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- Share Code OG --}}
+    <meta property="og:url" content="@yield('ogurl', 'https://www.fiverr.com/mostakimulkarim')" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@yield('ogtitle', 'My Ecom Website')" />
+    <meta property="og:description" content="@yield('ogdesc', 'Ecommerce Description')" />
+    <meta property="og:image" content="@yield('ogimg', 'http://127.0.0.1:8000/BlogImages/2021/02//5/defying-the-traditional-and-mainstream-parties.jpg')" />
+
+
     <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->

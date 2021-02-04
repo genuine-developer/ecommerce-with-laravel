@@ -2,6 +2,16 @@
 @section('blog')
     active
 @endsection
+@section('title')
+        {{ $blog->title }}
+@endsection
+@section('ogtitle'){{ $blog->title }}@endsection
+@section('ogdesc'){!! $blog->summary !!}@endsection
+@section('ogurl'){{ route('SingleBlog', ['slug'=>$blog->slug]) }}@endsection
+@section('ogimg')
+        {{ asset('BlogImages/'.$blog->created_at->format('Y/m/').'/'.$blog->id.'/'.$blog->thumbnail)}}
+@endsection
+
 @section('content')
    
     <!-- .breadcumb-area start -->
@@ -39,8 +49,8 @@
                                 <div class="col-sm-7 ">
                                     <ul class="socil-icon d-flex">
                                         <li>share it on :</li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ route('SingleBlog', ['slug'=>$blog->slug]) }}"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://twitter.com/share?text={{ $blog->title }}&url={{ route('SingleBlog', ['slug'=>$blog->slug]) }}"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
                                         <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
                                         <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
