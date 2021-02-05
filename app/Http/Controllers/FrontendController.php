@@ -103,5 +103,32 @@ class FrontendController extends Controller
         );
     }
 
+    /**
+     * Search Function
+     */
+    function Search(Request $request){
+        //return $request->q;
+
+        $product = Product::query();
+
+        if ($request->q)
+        {
+            // simple where here or another scope, whatever you like
+            $product->where('title','like',$request->q);
+        }
+
+        if ($request->q)
+        {
+            $product->orwhere('price','like',$request->q);
+        }
+
+        if ($request->q)
+        {
+            $product->orwhere('slug','like',$request->q);
+        }
+
+        $all_product = $product->get();
+        echo $all_product;
+    }
     
 }

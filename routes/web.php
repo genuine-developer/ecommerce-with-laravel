@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
+/**
+ * Search route
+ */
+Route::get('/search', 'FrontendController@Search')->name('Search');
+
 Auth::routes(['verify' => true]);
 
 // Frontend Controller
@@ -194,6 +199,8 @@ Route::get('/{locale}', function ($locale) {
     App::setLocale($locale);
    // return back();
 })->name('lang');
+
+
 
 
 
