@@ -56,14 +56,32 @@
 
                 <div class="col-12">
                     <div class="pagination-wrapper text-center mb-30">
-                        {{ $blogs->links() }}
-                        {{-- <ul class="page-numbers">
-                            <li><a class="prev page-numbers" href="#"><i class="fa fa-arrow-left"></i></a></li>
-                            <li><span class="page-numbers current">1</span></li>
-                            <li><a class="page-numbers" href="#">2</a></li>
-                            <li><a class="page-numbers" href="#">3</a></li>
-                            <li><a class="next page-numbers" href="#"><i class="fa fa-arrow-right"></i></a></li>
-                        </ul> --}}
+                        {{-- {{ $blogs->links() }} --}}
+                        @if ($blogs->lastPage() > 1)
+                            
+                        
+                        <ul class="page-numbers">
+                            <li class="{{ $blogs->currentPage() == 1 ? 'disabled' : ''}}"><a class="prev page-numbers" href="{{ $blogs->url(1) }}"><i class="fa fa-arrow-left"></i></a></li>
+
+                            @for ($i = 1; $i <= $blogs->lastPage(); $i++)
+                                <li class="cstm-paginate {{ $blogs->currentPage() == $i ? 'current' : ''}}">
+                                    <a class="page-numbers" href="{{ $blogs->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                            
+                            <li class="{{ $blogs->currentPage() == $blogs->lastPage() ? 'disabled' : ''}}"><a class="next page-numbers" href="{{ $blogs->url($blogs->currentPage() + 1 ) }}"><i class="fa fa-arrow-right"></i></a></li>
+                        </ul>
+                        @endif
+                        <style>
+                            .cstm-paginate.current{
+                                background-color: #ef4836;
+                                color: white;
+                            }
+                            .cstm-paginate.current > a{
+                                
+                                color: white;
+                            }
+                        </style>
                     </div>
                 </div>
             </div>

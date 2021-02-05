@@ -98,7 +98,7 @@ class FrontendController extends Controller
                 'blog' => $blog,
                 'category' => $category,
                 'related' => Blog::where('category_id', $blog->category_id)->get()->except(['id', $blog->id]),
-                'comments' => Comment::where('status', 2)->latest()->get()
+                'comments' => Comment::where('status', 2)->where('blog_id', $blog->id)->latest()->get()
             ]
         );
     }
