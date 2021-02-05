@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Search route
  */
-Route::get('/search', 'FrontendController@Search')->name('Search');
+Route::get('/product/search', 'FrontendController@Search')->name('Search');
 
 Auth::routes(['verify' => true]);
 
